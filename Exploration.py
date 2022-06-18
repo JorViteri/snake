@@ -1,3 +1,5 @@
+import sys
+from ast import literal_eval
 from SnakeClass import Snake
 
 
@@ -29,37 +31,58 @@ def exploration(pos, depth, mySnake):
             mySnake.increasePathCount()
 
 
+def main(argv):
+
+    if len(sys.argv) == 4:
+
+        mySnake = Snake(
+            body=literal_eval(sys.argv[2]),
+            board=literal_eval(sys.argv[1]),
+            depth=int(sys.argv[3]),
+        )
+
+        exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)
+
+        print(
+            f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
+        )
+
+    else:
+        # Depth 3
+        mySnake = Snake(
+            body=[[2, 2], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0]],
+            board=[4, 3],
+            depth=3,
+        )
+
+        exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)
+
+        print(
+            f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
+        )
+
+        # Depth 10
+        mySnake = Snake(
+            body=[[0, 2], [0, 1], [0, 0], [1, 0], [1, 1], [1, 2]],
+            board=[2, 3],
+            depth=10,
+        )
+
+        exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)
+
+        print(
+            f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
+        )
+
+        # Depth 4
+        mySnake = Snake(body=[[5, 5], [5, 4], [4, 4], [4, 5]], board=[10, 10], depth=4)
+
+        exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)
+
+        print(
+            f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
+        )
+
+
 if __name__ == "__main__":
-
-    # Depth 3 
-    mySnake = Snake(
-        body=[[2, 2], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0]],
-        board=[4, 3],
-        depth=3,
-    )
-
-    exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)
-
-    print(
-        f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
-    )
-
-    # Depth 10
-    mySnake = Snake(
-        body=[[0, 2], [0, 1], [0, 0], [1, 0], [1, 1], [1, 2]], board=[2, 3], depth=10
-    )
-
-    exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)
-
-    print(
-        f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
-    )
-
-    # Depth 4
-    mySnake = Snake(body=[[5, 5], [5, 4], [4, 4], [4, 5]], board=[10, 10], depth=4)
-
-    exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)
-
-    print(
-        f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
-    )
+    main(sys.argv[1:])
