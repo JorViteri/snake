@@ -1,11 +1,10 @@
-board = [4, 3]
-snakeOriginal = [[2, 2], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0]]
-snakeCurrent = [[2, 2], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0]]
+board = [10, 10]
+snakeCurrent = [[5,5], [5,4], [4,4], [4,5]]
 snakeHead = []  # TODO mejor unos stacks aqui
 oldSnakeHeads = []
 snakeTail = []
 oldSnakeTails = []
-depth = 3
+depth = 4
 positionsChecked = []
 count = 0
 
@@ -56,7 +55,7 @@ def validateNeighbour(pos):
 
     # Position in body of snakeCurrent
 
-    if pos in snakeCurrent and pos != snakeTail:
+    if pos in snakeCurrent and pos != snakeCurrent[len(snakeCurrent) - 1]:
         return False
 
     return True
@@ -88,8 +87,8 @@ def exploration(pos, depth, paths):
             paths = exploration(neighbour, depth - 1, paths)
             undoMoveSnake()
 
-        if isValid and depth == 1: 
-            global count 
+        if isValid and depth == 1:
+            global count
             count = count + 1
             paths.append(neighbour)
             # return paths
@@ -101,9 +100,7 @@ def exploration(pos, depth, paths):
 
 if __name__ == "__main__":
 
-    depth = 3
+    depth = 4
     result = exploration(snakeCurrent[0], depth, [])
-
-    numResults = (len(result)) / 21
 
     print(f"{count} rutas de profundidad {depth} posibles")
