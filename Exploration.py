@@ -31,6 +31,7 @@ def exploration(pos, depth, mySnake):
 
 if __name__ == "__main__":
 
+    # Depth 3 
     mySnake = Snake(
         body=[[2, 2], [3, 2], [3, 1], [3, 0], [2, 0], [1, 0], [0, 0]],
         board=[4, 3],
@@ -43,6 +44,7 @@ if __name__ == "__main__":
         f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
     )
 
+    # Depth 10
     mySnake = Snake(
         body=[[0, 2], [0, 1], [0, 0], [1, 0], [1, 1], [1, 2]], board=[2, 3], depth=10
     )
@@ -53,6 +55,7 @@ if __name__ == "__main__":
         f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
     )
 
+    # Depth 4
     mySnake = Snake(body=[[5, 5], [5, 4], [4, 4], [4, 5]], board=[10, 10], depth=4)
 
     exploration(mySnake.getCurrentHead(), mySnake.getDepth(), mySnake)

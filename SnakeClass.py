@@ -5,25 +5,19 @@ class Snake:
         self.board = board
         self.depth = depth
         self.count = 0
-        self.oldSnakeHeads = []
         self.oldSnakeTails = []
-        self.snakeHead = []  # TODO
-        self.snakeTail = []  # TODO
 
     def moveSnake(self, newSnakeHead):
         self.oldSnakeTails = self.oldSnakeTails + [
             self.snakeCurrent[self.snakeLength - 1]
         ]
-        self.snakeTail = self.snakeCurrent.pop()
-        self.oldSnakeHeads.append(self.snakeCurrent[0])
+        self.snakeCurrent.pop()
         self.snakeCurrent = [newSnakeHead] + self.snakeCurrent
-        self.snakeHead = newSnakeHead
 
     def undoMoveSnake(self):
-        self.snakeHead = self.oldSnakeHeads.pop()
-        self.snakeTail = self.oldSnakeTails.pop()
+        tmpSnakeTail = self.oldSnakeTails.pop()
         self.snakeCurrent.pop(0)
-        self.snakeCurrent.append(self.snakeTail)
+        self.snakeCurrent.append(tmpSnakeTail)
 
     def validateNeighbour(self, pos):
         xLim = self.board[0] - 1
