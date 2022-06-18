@@ -17,22 +17,29 @@ def getNeighbours(pos):
 
 
 def exploration(pos, depth, mySnake):
+    # Get the neighbours
     neighboursList = getNeighbours(pos)
 
+    # Process each one
     for neighbour in neighboursList:
+
+        # Check if it is valid
         isValid = mySnake.validateNeighbour(neighbour)
 
+        # If valid, but depth not reached, move snake and repeat
         if isValid and 1 < depth:
             mySnake.moveSnake(neighbour)
             exploration(neighbour, depth - 1, mySnake)
             mySnake.undoMoveSnake()
 
+        # If valid and depth reached increase count of paths
         if isValid and depth == 1:
             mySnake.increasePathCount()
 
 
 def main(argv):
 
+    # If there are arguments
     if len(sys.argv) == 4:
 
         mySnake = Snake(
@@ -47,6 +54,7 @@ def main(argv):
             f"{mySnake.getPathCount()} rutas de profundidad {mySnake.getDepth()} posibles"
         )
 
+    # If the are no arguments
     else:
         # Depth 3
         mySnake = Snake(
