@@ -47,7 +47,7 @@ def validateNeighbour(pos):
     yLim = board[1] - 1
 
     # Position not within matrix
-    if pos[0] < 0 or pos[1] < 1 or pos[0] > xLim or pos[1] > yLim:
+    if pos[0] < 0 or pos[1] < 0 or pos[0] > xLim or pos[1] > yLim:
         return False
 
     # TODO no deberia ser necesario Position visited
@@ -82,22 +82,17 @@ def exploration(pos, depth, paths):
     for neighbour in neighboursList:
         isValid = validateNeighbour(neighbour)
 
-        # TODO
-        if isValid:
-            co = "¿por que se detiene?"
-        # TODO
-
-        if isValid and 1 < depth:  # TODO cuidado con la profundidad
+        if isValid and 1 < depth:
             paths.append(neighbour)
             moveSnake(neighbour)
             paths = exploration(neighbour, depth - 1, paths)
             undoMoveSnake()
 
-        if isValid and depth == 1:  # TODO al volver a la cabeza, vuelve para aqui
-            global count  # TODO
+        if isValid and depth == 1: 
+            global count 
             count = count + 1
             paths.append(neighbour)
-            return paths
+            # return paths
 
     lastList = lastList + paths
 
