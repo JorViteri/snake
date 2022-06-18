@@ -1,1 +1,2 @@
-# snake
+# Snake
+Prueba técnica.
