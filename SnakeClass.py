@@ -9,17 +9,13 @@ class Snake:
 
     # Moves the snake setting the new head and saving the old tail in a stack
     def moveSnake(self, newSnakeHead):
-        self.oldSnakeTails = self.oldSnakeTails + [
-            self.snakeCurrent[self.snakeLength - 1]
-        ]
-        self.snakeCurrent.pop()
+        self.oldSnakeTails = self.oldSnakeTails + [self.snakeCurrent.pop()]
         self.snakeCurrent = [newSnakeHead] + self.snakeCurrent
 
     # Removes the current head and recovers the old tail
     def undoMoveSnake(self):
-        tmpSnakeTail = self.oldSnakeTails.pop()
         self.snakeCurrent.pop(0)
-        self.snakeCurrent.append(tmpSnakeTail)
+        self.snakeCurrent.append(self.oldSnakeTails.pop())
 
     # Check if the position is valid for movement
     def validateNeighbour(self, pos):
